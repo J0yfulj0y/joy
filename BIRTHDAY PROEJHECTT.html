@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title> Happiest birthday my love :) </title>
+	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+	<style>
+		.headings {font-family: serif, baskerville; font-size:60px; }
+
+		body { background-size: cover; 
+      		background-repeat: no-repeat; 
+     		background-position: none;  	
+     		text-align: center; font-family: arial;color:#5b6b59; overflow: hidden; transition: background 1s ease-in-out; background-image: url('https://i.redd.it/i55nezlpheu71.gif'); }
+
+		.text {margin-top: 65px;background-color:#c8bca8; 
+			    opacity: 0.75;
+  				display: inline-block;
+  				padding: 10px 20px;
+  				border-radius: 8px; margin-bottom: 50px;}
+
+  		.paragraphs {font-family: georgia, serif; background-color:#a68873; display: inline-block; padding: 10px; border-radius: 8px; color:#534d22; font-size: 25px; opacity: 0.8;}
+
+  		.paragraph2 {font-family: Garamond, serif; background-color: #E37383; display: inline-block; padding: 10px; border-radius: 8px; color:#770737; font-size: 30px; opacity: 0.8;}
+
+      .paragraphs3 {font-family: monospace; background-color: #2B4670; display:inline-block; padding: 10x; border-radius: 8px; color: #E3BBBD; font-size: 30px; opacity:0.8;}
+
+      .paragraphs4 {font family: georgia, serif; display: inline-block; padding: 10px; border-radius: 8px; font-size: 25px; opacity:0.8;}
+
+      .paragraphs5 {font-family: Lucida Handwriting, cursive; display: inline-block; padding:10px; font-size: 20px; color: #FFF5E1; background-color: #A97479; border-radius: 10px;}
+
+      .headings2{font-family: Lucida Handwriting, cursive; display: inline-block; padding: 10px; font-size: 20px; color: #FFF5E1; background-color: #A97479; border-radius: 10px;}
+
+
+
+		.button {background-color: #E0BFB8;
+        color: #E37383;
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    	transition: 150ms ease;}
+
+
+    	button:hover{background-color: #FAA0A0 ; scale: 2;}
+
+    	.audiocontrol {position: fixed; top: 15px; right: 20px; z-index: 1000;}
+
+    	.audiocontrol button{
+    		font-size: 14px;
+  			padding: 6px 10px;
+  			margin-left: 5px;
+  			background-color: #663399;
+  			color: #D8BFD8;
+  			border: none;
+  			border-radius: 5px;
+  			cursor: pointer;
+  			box-shadow: 0 0 5px #cb416b;
+  			transition: background-color 0.3s;}
+
+    	.audiocontrol button:hover{background-color:#FFF0F5; scale:1.5;}
+       
+
+
+        .page {display: none;
+            text-align: center;
+            padding: 50px;}
+
+        
+
+        .active { display: block; }
+
+
+        .next-button:hover {
+        background-color: #ff4500;}
+
+        .play-button:hover {background-color: #663399;}
+
+        .glow {
+  				box-shadow: 0 0 15px 5px #cb416b;
+  				transition: box-shadow 0.3s ease-in-out;
+  				animation: pulseGlow 1.5s infinite ease-in-out;}
+
+  				@keyframes pulseGlow {
+      0%, 100% {
+        box-shadow: 0 0 15px 5px #cb416b;
+      }
+      50% {
+        box-shadow: 0 0 30px 15px #cb416b;
+      }
+    }
+
+    .music-icon {
+  		position: fixed;
+  		top: 15px;
+ 		 right: 20px;
+  		z-index: 1000;
+  		background-color:transparent;
+  		color:white;
+  		background-size:cover;
+  		background-position: center;
+  		border: none;
+  		cursor: pointer;
+  		outline: none;
+  		font-size: 28px;
+  		transition: transform 0.3s ease-in-out;
+		}
+
+		.music-icon:hover{background-color: transparent; scale:1.5;}
+
+	.music-icon span {
+  	display: inline-block;
+  	transition: transform 0.3s ease-in-out;
+	}
+
+	.music-icon.playing span {
+  	animation: bounceNote 1s infinite;
+  	color: #ff69b4;
+	}
+  		
+ 
+
+		@keyframes bounceNote {
+  		0%, 100% {
+    		transform: translateY(0) rotate(0deg);
+  	}
+  		50% {
+    		transform: translateY(-6px) rotate(10deg);
+  		}
+		}
+
+    .music-icon.playing {
+  		background-color:transparent;
+		}
+
+    path#line {
+  fill: none;
+  stroke: url(#ecgGradient);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 3.4s linear infinite;
+}
+
+path#heart {
+  transform-origin: center;
+  animation:
+    blink 3.4s linear infinite,
+    heartGlow 3.4s ease-in-out infinite,
+    heartColor 3.4s ease-in-out infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes blink {
+  0%, 60% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+  75% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1.3);
+  }
+  85% {
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@keyframes heartGlow {
+  0%   { filter: drop-shadow(0 0 10px #ff4d4d); }
+  33%  { filter: drop-shadow(0 0 10px #ff1aff); }
+  66%  { filter: drop-shadow(0 0 10px #4da6ff); }
+  100% { filter: drop-shadow(0 0 10px #ff4d4d); }
+}
+
+@keyframes heartColor {
+  0%, 60%, 100% { fill: red; }
+  70% { fill: #ff1aff; }
+  80% { fill: #4da6ff; }
+}
+
+.message {
+  position: absolute;
+  bottom: 60px;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff4d4d;
+  opacity: 0;
+  animation: fadeInOut 6s ease-in-out infinite;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; transform: translateY(10px); }
+  20%, 80% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseBackground {
+  0% { background: radial-gradient(circle at center, #ffe6e6 20%, #fff0f0 80%); }
+  33% { background: radial-gradient(circle at center, #ffccff 20%, #ffe6ff 80%); }
+  66% { background: radial-gradient(circle at center, #ccf2ff 20%, #e6f9ff 80%); }
+  100% { background: radial-gradient(circle at center, #ffe6e6 20%, #fff0f0 80%); }
+}
+
+.heartbeat-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pulseBackground 4s infinite;
+  background: radial-gradient(circle at center, #ffe6e6 20%, #fff0f0 80%);
+  border-radius: 20px;
+  margin: 20px auto;
+  padding: 20px 0;
+  z-index: 0;
+}
+
+.letter {
+  opacity: 0;
+  display: inline-block;
+  animation: fadeInLetter 0.4s forwards;
+}
+
+@keyframes fadeInLetter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.giftopright {
+  position: absolute; 
+  height:auto ;
+  border-radius: 5px; width: 95px}
+
+
+  .giftop {
+  position: absolute; 
+  bottom:5px; 
+  height:auto ;
+  border-radius: 8px;}
+
+
+	</style>
+
+	<script>
+		function changePage(currentId, nextId) {document.getElementById(currentId).classList.remove("active");
+			document.getElementById(nextId).classList.add("active");
+
+			let newBg= document.getElementById(nextId).getAttribute("data-bg"); 
+			document.body.style.backgroundImage="url('" + newBg + "')"; }
+
+
+	</script>
+	
+
+</head>
+
+<body> 
+	<div id="page1" class="page active" data-bg="https://i.redd.it/i55nezlpheu71.gif">
+		<h1 class="headings, text">Heelloo my loveeeyy !!</h1>
+	
+		<br>
+	<div style="text-align: center, padding: 130px">
+		<img src ="https://usagif.com/wp-content/uploads/2022/hqgif/axolotl-acegif-9-axolotl-looks-at-you.gif"  width ="375">
+	</div>
+
+	 <br>
+
+		<p class="paragraphs">Hey my baby i wanted to atleast make something for your birthday. <br> I just really, from the bottom of my heart, hope you like this,<br>even though it really isnt much, but i wanted to make something genuine <br>and put the effort and time in for you because you deserve all of it and more <3. </p>
+			
+		<br>
+
+		<button class="button" onclick="changePage('page1', 'page2')">Click me !!!</button>
+	</div>
+
+	<div id="page2" class=" page " data-bg="https://i.redd.it/aevar6lpheu71.gif">
+		<h1 class="headings text" style="background-color: #FAA0A0; color: #953553;"> I still remember the very first time we met...</h1>
+		<br>
+
+    <img src="C:\Users\T-300 V3\Documents\birthday project\dancing happy dog.gif" class="giftopright" alt="decoraction">
+
+		<p id="animated-paragraph" class="paragraph2 glow"> We clicked almost instantly and words just started flowing so easily,<br> us laughing loudly without a care in the world and it was the best thing ever.<br> Since that moment on, i knew that i just wanted to be <br>around you all the time. Your laugh, your patience, your kindness; <br>it was all so captivating and i wanted nothing more <br>than to spend my time with you and i still happily do so. <br>I still replay those moments in my head from time to time<br> and it makes me feel so happy that i met someone<br> that's so perfect yet he can't see it.<br>Atleast not yet..</p>
+
+		<br>
+
+		<button class="button" onclick="changePage('page2', 'page1')">go back?</button>
+		<button class="button" onclick="changePage('page2', 'page3')">Next!</button>
+	</div> 
+     <!-- Page 3 -->
+  <div id="page3" class="page" data-bg="https://64.media.tumblr.com/d8b35a89f086be9a52eab6153aed0bc6/61e45c7d98f8abd5-59/s540x810/ce63bc7cd19717f11a64ddb99311aba94eb55412.gif">
+    <h1 class="headings, text" style="background-color: #2B4670 ; color: #E3BBBD; font-family: monospace;">You brought my heart back to life</h1>
+    <br>
+
+    <p id="animated-paragraph2" class="paragraphs3">
+     Every day i get to wake up and be able to talk to you <br>and be in your presence and the only reason<br> that my heart beats is for you my baby, <br>your name has been forever carved into my heart
+     <br> and i see it sweetheart, I can see us growing together and <br> getting closer with each other more and more each second even <br> and we're getting there my love, we can make it and everything's going to be okay <br> no matter what struggle we go through, I just know that we're going through it together and forever..</p>
+    <br>
+
+  <br>
+
+<div class="heartbeat-wrapper">
+  <svg viewBox="0 0 600 100" xmlns="http://www.w3.org/2000/svg" style="width: 800px; height: 200px; z-index: 1;">
+    <defs>
+      <linearGradient id="ecgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ff4d4d" />
+        <stop offset="50%" stop-color="#ff1aff" />
+        <stop offset="100%" stop-color="#4da6ff" />
+      </linearGradient>
+    </defs>
+
+    
+    <path id="line" d="
+      M0,50 L50,50 L60,30 L70,70 L80,50
+      L150,50 L160,30 L170,70 L180,50
+      L250,50 L260,30 L270,70 L280,50
+      L350,50 L370,30 L390,70 L410,50
+      L600,50" />
+
+    
+    <path id="heart" d="
+      M300,50
+      C290,30 270,30 270,50
+      C270,70 300,90 300,90
+      C300,90 330,70 330,50
+      C330,30 310,30 300,50" />
+  </svg>
+
+  
+  <div class="message"> I love you..</div>
+</div>
+
+
+    <button class="button" onclick="changePage('page3', 'page2')">back</button>
+    <button class="button" onclick="changePage('page3', 'page4')">next</button>
+  </div>
+
+
+  <div id="page4" class="page" data-bg="https://i.pinimg.com/originals/ec/d6/72/ecd67255b08380eb534d3f8ee397bc85.gif">
+    <h1 class="text">Happiest birthday my precious <3!</h1>
+    <br>
+    <img src="C:\Users\T-300 V3\Documents\birthday project\better-one-unscreen.gif" width="375">
+    <br>
+
+    <p class="paragraphs"> I have one last letter for you my handsome!</p>
+
+    <br>
+    <button class="button" onclick="changePage('page4', 'page3')">Back</button>
+    <button class="button" onclick="changePage('page4', 'page5')">Continue here!</button>
+  </div>
+
+  <div id="page5" class="page" data-bg="https://i.pinimg.com/originals/78/e8/7a/78e87ace693a39b26aa03e77accff4e2.gif">
+    <h6 class="text" style="background-color: lavender; color: hotpink;"> (i love you)</h6> <br>
+    <br>
+    <img src="C:\Users\T-300 V3\Documents\birthday project\envellop-dancing-unscreen.gif" width="350">
+    <br>
+    <p class="paragraph2">open it?</p><br>
+    <br>
+
+  <button class="button" onclick="changePage('page5', 'page7')">Open it!</button>
+  <button class="button" onclick="changePage('page5','page6')">No,ty..</button><br><br><br><br>
+  <br>
+  <button class="button" onclick="changePage('page5', 'page4')">back!</button>
+
+</div>
+
+<div id="page6" class="page" data-bg="https://i.pinimg.com/originals/ea/9d/b7/ea9db7ad18f9b1d96b335bf06ac56b5c.gif">
+  <h6>                                                                                      </h6><br>
+  <br>
+  <img src="C:\Users\T-300 V3\Documents\birthday project\crying duck.gif" width="400"><br>
+  <br>
+  <p style="background-color: lavenderblush; color: hotpink;" class="paragraphs4">Awww please try again...</p><br>
+
+  <button class="button" onclick="changePage('page6', 'page5')">Please:(?</button>
+
+
+</div>
+
+<div id="page7" class="page" data-bg="https://i.pinimg.com/originals/27/a4/ef/27a4efe3e573112c4db783d505f2745a.gif">
+  <h4 class="headings2"> Happy birthday my one and only <3!</h4>
+    <br>
+    <p class="paragraphs5">Every word I write here is just a small reflection<br>of the overflowing love I feel for you.<br>You mean the world to me, and when i look and <br>see you my baby, i see the most handsome, patient, caring, <br>hardworking and loving angel i've ever laid my eyes on. <br>Baby i see how hard you try your best in everything you<br>do and i see how far YOU have come and im so beyond proud of you. <br>You have the purest heart and most amazing soul and it's just so overwhelming<br>to feel your love in this way and im so grateful that i got the chance to feel it<br>and it made me sure that i never want to leave your side, i might be selfish for this but<br></p>
+
+      <p class="paragraphs5">i wouldnt want anyone else to feel your love and im gonna do my absolute hardest to give you <br>the world and all my love in return forever and always. I see you my love, i see you <br>deeper than anyone else has and it only makes me fall inlove with you even more.<br>And i see our future together just us getting married, cuddling in bed and waking <br>up in the morning with kisses and being so gentle with each other and i cant wait to watch our kids grow up together<br>.Nothing is going to stop us from going this path my baby and ill make sure of it. I will never ever give up on us<br>no matter what and ill always be your rock to lean on and I pinky promise you that my dear. <br>I love you beyond comprehension sweetheart, my husband, my everything. <br>Happy birthday my baby i wish you all the best always and i hope you have an awesome warm and cozy day today and always..<3</p>
+    <br>
+
+ <button class="button" onclick="changePage('page7', 'page1')">Start all over?</button>
+
+</div>
+
+
+<audio id="bg-music" loop>
+  <source src="C:\Users\T-300 V3\Documents\birthday project\Alex Warren - Ordinary (Official Music Video).mp3">
+  Your browser does not support the audio element.
+</audio>
+
+<button class="music-icon" onclick="toggleMusic(this)">
+  <span>press me pls!</span>
+</button>
+
+
+ <script>
+
+    const music = document.getElementById('bg-music');
+    function toggleMusic(btn) {
+      const label = btn.querySelector('span');
+      if (music.paused) {
+        music.volume = 0;
+        music.play();
+        let fadeIn = setInterval(() => {
+          if (music.volume < 1) {
+            music.volume = Math.min(music.volume + 0.05, 1);
+          } else {
+            clearInterval(fadeIn);
+          }
+        }, 100);
+        btn.classList.add('playing');
+        label.textContent = '🔊';
+      } else {
+        let fadeOut = setInterval(() => {
+          if (music.volume > 0.05) {
+            music.volume = Math.max(music.volume - 0.05, 0);
+          } else {
+            clearInterval(fadeOut);
+            music.pause();
+          }
+        }, 100);
+        btn.classList.remove('playing');
+        label.textContent = '🔇';
+      }
+    }
+
+
+    function animateParagraph() {
+      const paragraph = document.getElementById("animated-paragraph");
+      const fullText = `We clicked almost instantly,<br>
+				and words just started flowing so easily.<br>
+				Us laughing loudly without a care in the world—<br>
+				it was the best thing ever.<br>
+				Since that moment on,<br>
+				I knew that I just wanted to be around you all the time.<br>
+				Your laugh, your patience, your kindness—<br>
+				it was all so captivating.<br>
+				I wanted nothing more<br>
+				than to spend my time with you,<br>
+				and I still happily do so.<br>
+				I still replay those moments in my head<br>
+				and it makes me feel so happy<br>
+				that I met someone so perfect,<br>
+				even if he can't see it...<br>
+				At least not yet.`;
+
+
+      paragraph.innerHTML = ""; 
+    let index = 0;
+
+    
+    if (window.letterInterval) {
+      clearInterval(window.letterInterval);
+    }
+
+    window.letterInterval = setInterval(() => {
+     
+      const currentChar = fullText[index];
+
+      if (currentChar === "<") {
+        
+        const endTag = fullText.indexOf(">", index);
+        paragraph.innerHTML += fullText.slice(index, endTag + 1);
+        index = endTag + 1;
+      } else {
+        paragraph.innerHTML += currentChar;
+        index++;
+      }
+
+      if (index >= fullText.length) {
+        clearInterval(window.letterInterval);
+      }
+    }, 45); 
+  }
+
+
+
+function animateParagraphPage3() {
+  const paragraph = document.getElementById("animated-paragraph2");
+  const fullText = `Every day i get to wake up and be able to talk to you <br>
+  and be in your presence and the only reason<br>
+   that my heart beats is for you my baby,
+    <br>your name has been forever carved into my heart
+     <br> and i see it sweetheart, I can see us growing together and <br> 
+     getting closer with each other more and more each second even <br> 
+     and we're getting there my love, we can make it and everything's going to be okay <br>
+      no matter what struggle we go through, <br>
+    I just know that we're going through it together and forever..`;
+
+  paragraph.innerHTML = ""; 
+    let index = 0;
+
+    
+    if (window.letterInterval) {
+      clearInterval(window.letterInterval);
+    }
+
+    window.letterInterval = setInterval(() => {
+     
+      const currentChar = fullText[index];
+
+      if (currentChar === "<") {
+        
+        const endTag = fullText.indexOf(">", index);
+        paragraph.innerHTML += fullText.slice(index, endTag + 1);
+        index = endTag + 1;
+      } else {
+        paragraph.innerHTML += currentChar;
+        index++;
+      }
+
+      if (index >= fullText.length) {
+        clearInterval(window.letterInterval);
+      }
+    }, 47); 
+  }
+
+
+  let confettiShown = false; 
+
+function changePage(currentId, nextId) {
+
+  document.getElementById(currentId).classList.remove("active");
+  document.getElementById(nextId).classList.add("active");
+
+  let newBg = document.getElementById(nextId).getAttribute("data-bg");
+  document.body.style.backgroundImage = "url('" + newBg + "')";
+
+  if (nextId === "page2") animateParagraph();
+  if (nextId === "page3") animateParagraphPage3();
+  if (nextId === "page7") {
+    if (!confettiShown) {
+      confettiShown = true;
+      confetti({
+        particleCount: 150,
+        spread: 90,
+        origin: { y: 0.6 },
+        colors: ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd']
+      });
+    }
+  }
+}
+
+
+</script>
+
+
+</div>
+
+<div id="heartcontainer"></div>
+
+</body>
+</html>
